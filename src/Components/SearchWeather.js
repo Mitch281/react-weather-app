@@ -1,18 +1,26 @@
-import { Link } from "react-router-dom/cjs/react-router-dom.min"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { useState } from "react";
 
-const SearchWeather = () => {
+const SearchWeather = (props) => {
     const [location, setLocation] = useState("");
+    const history = useHistory();
+
+    function submitLocation(e) {
+        e.preventDefault();
+
+        props.setSettings(location);
+
+        // Like using <Link to=`query=${location}`></Link>
+        history.push(`/query=${location}`);
+    }
 
     return (
         <div>
-            <form>
+            <form onSubmit={submitLocation}>
                 <label htmlFor="location"></label>
                 <input type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)}/>
                 
-                <Link to={`/location=${location}`}>
-                    <input type="submit" value="search" />
-                </Link>
+                <input type="submit" value="Search" />
             </form>
         </div>
     )
