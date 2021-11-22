@@ -1,7 +1,22 @@
+import SearchWeather from "./Components/SearchWeather";
+import SearchResults from "./Components/SearchResults";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+
 function App() {
   return (
-    <div className="App">
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <SearchWeather />
+          </Route>
+          <Route exact path="/location=:location">
+            <SearchWeather />
+            <SearchResults />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
