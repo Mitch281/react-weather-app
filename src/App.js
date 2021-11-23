@@ -8,38 +8,36 @@ function App() {
   const apiKey = config.key;
 
   const [apiUrl, setApiUrl] = useState("");
-  const [apiData, setApiData] = useState("");
 
-  const [feelsLike, setFeelsLike] = useState("");
-  const [minTemp, setMinTemp] = useState("");
-  const [maxTemp, setMaxTemp] = useState("");
-  const [humidity, setHumidity] = useState("");
-  const [windSpeed, setWindSpeed] = useState("");
-  const [windDirection, setWindDirection] = useState("");
+  // const [minTemp, setMinTemp] = useState("");
+  // const [maxTemp, setMaxTemp] = useState("");
+  // const [humidity, setHumidity] = useState("");
+  // const [windSpeed, setWindSpeed] = useState("");
+  // const [windDirection, setWindDirection] = useState("");
 
   function setSettings(city, countryCode) {
     setApiUrl(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`);
   }
 
-  useEffect(() => {
-    async function fetchWeather() {
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        setApiData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchWeather() {
+  //     try {
+  //       const response = await fetch(apiUrl);
+  //       const data = await response.json();
+  //       setApiData(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
 
-    if (apiUrl !== "") {
-      fetchWeather();
-    }
-  }, [apiUrl]);
+  //   if (apiUrl !== "") {
+  //     fetchWeather();
+  //   }
+  // }, [apiUrl]);
 
-  useEffect(() => {
-    console.log(apiData);
-  }, [apiData]);
+  // useEffect(() => {
+  //   console.log(apiData);
+  // }, [apiData]);
 
   return (
     <Router>
@@ -50,7 +48,7 @@ function App() {
           </Route>
           <Route exact path="/query=:city/:country">
             <SearchWeather setSettings={setSettings} />
-            <SearchResults />
+            <SearchResults apiUrl={apiUrl} />
           </Route>
         </Switch>
       </div>
