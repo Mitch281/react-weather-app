@@ -1,13 +1,23 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { config } from "../config.js";
+import { countryCodes } from "../country-codes.js";
 
-const SearchResults = (props) => {
+const SearchResults = () => {
     const { city, country } = useParams();
+    const countryCode = countryCodes[country];
 
+    const apiKey = config.key;
+
+    const [apiUrl, setApiUrl] = useState("");
     const [apiData, setApiData] = useState("");
     const [dataLoaded, setDataLoaded] = useState(false);
 
     const [feelsLike, setFeelsLike] = useState("");
+
+    useEffect(() => {
+        setApiUrl(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`);
+    }, []);
 
     function kelvinToCelsius(degrees) {
         const degreesCelsius = degrees - 273.15;
@@ -19,7 +29,7 @@ const SearchResults = (props) => {
     useEffect(() => {
         async function fetchWeather() {
             try {
-                const response = await fetch(props.apiUrl);
+                const response = await fetch(apiUrl);
                 const data = await response.json();
                 setApiData(data);
             } catch (error) {
@@ -27,11 +37,10 @@ const SearchResults = (props) => {
             }
         }
     
-        if (props.apiUrl !== "") {
-            console.log("made it");
+        if (apiUrl !== "") {
             fetchWeather();
         }
-    }, []);
+    }, [apiUrl]);
 
     useEffect(() => {
         if (apiData !== "") {
@@ -44,12 +53,6 @@ const SearchResults = (props) => {
             setFeelsLike(kelvinToCelsius(apiData.main.feels_like));
         }
     }, [dataLoaded]);
-
-    useEffect(() => {
-        if (feelsLike !== "") {
-            console.log(feelsLike);
-        }
-    }, [feelsLike]);
 
     return (
         <div id="weather">

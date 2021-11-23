@@ -16,8 +16,6 @@ const SearchWeather = (props) => {
             return;
         }
 
-        props.setSettings(city, countryCode);
-
         // Like using <Link to=`query=${location}`></Link>
         history.push(`/query=${city}/${country}`);
     }

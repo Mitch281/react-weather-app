@@ -2,12 +2,8 @@ import SearchWeather from "./Components/SearchWeather";
 import SearchResults from "./Components/SearchResults";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { useEffect, useState } from "react";
-import { config } from "./config.js";
 
 function App() {
-  const apiKey = config.key;
-
-  const [apiUrl, setApiUrl] = useState("");
 
   // const [minTemp, setMinTemp] = useState("");
   // const [maxTemp, setMaxTemp] = useState("");
@@ -15,9 +11,9 @@ function App() {
   // const [windSpeed, setWindSpeed] = useState("");
   // const [windDirection, setWindDirection] = useState("");
 
-  function setSettings(city, countryCode) {
-    setApiUrl(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`);
-  }
+  // function setSettings(city, countryCode) {
+  //   setApiUrl(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`);
+  // }
 
   // useEffect(() => {
   //   async function fetchWeather() {
@@ -44,11 +40,11 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <SearchWeather setSettings={setSettings} />
+            <SearchWeather />
           </Route>
           <Route exact path="/query=:city/:country">
-            <SearchWeather setSettings={setSettings} />
-            <SearchResults apiUrl={apiUrl} />
+            <SearchWeather />
+            <SearchResults />
           </Route>
         </Switch>
       </div>
