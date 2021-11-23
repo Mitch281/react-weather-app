@@ -2,21 +2,44 @@ import SearchWeather from "./Components/SearchWeather";
 import SearchResults from "./Components/SearchResults";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { useEffect, useState } from "react";
+import { config } from "./config.js";
 
 function App() {
-  const api = {
-    key: "43e612fa05ad672380ed13c09b50c2be"
-  };
+  const apiKey = config.key;
 
   const [apiUrl, setApiUrl] = useState("");
+  const [apiData, setApiData] = useState("");
 
-  function setSettings(city) {
-    setApiUrl(`api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api.key}`);
+  const [feelsLike, setFeelsLike] = useState("");
+  const [minTemp, setMinTemp] = useState("");
+  const [maxTemp, setMaxTemp] = useState("");
+  const [humidity, setHumidity] = useState("");
+  const [windSpeed, setWindSpeed] = useState("");
+  const [windDirection, setWindDirection] = useState("");
+
+  function setSettings(city, countryCode) {
+    setApiUrl(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`);
   }
 
   useEffect(() => {
-    console.log(apiUrl);
+    async function fetchWeather() {
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        setApiData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (apiUrl !== "") {
+      fetchWeather();
+    }
   }, [apiUrl]);
+
+  useEffect(() => {
+    console.log(apiData);
+  }, [apiData]);
 
   return (
     <Router>
@@ -25,7 +48,7 @@ function App() {
           <Route exact path="/">
             <SearchWeather setSettings={setSettings} />
           </Route>
-          <Route exact path="/query=:location">
+          <Route exact path="/query=:city/:country">
             <SearchWeather setSettings={setSettings} />
             <SearchResults />
           </Route>

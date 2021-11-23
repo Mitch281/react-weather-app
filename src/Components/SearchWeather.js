@@ -1,24 +1,35 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { useState } from "react";
+import { countryCodes } from "../country-codes.js";
 
 const SearchWeather = (props) => {
-    const [location, setLocation] = useState("");
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
     const history = useHistory();
 
     function submitLocation(e) {
         e.preventDefault();
 
-        props.setSettings(location);
+        const countryCode = countryCodes[country];
+        if (countryCode === undefined) {
+            alert("Not a valid country!");
+            return;
+        }
+
+        props.setSettings(city, countryCode);
 
         // Like using <Link to=`query=${location}`></Link>
-        history.push(`/query=${location}`);
+        history.push(`/query=${city}/${country}`);
     }
 
     return (
         <div>
             <form onSubmit={submitLocation}>
-                <label htmlFor="location"></label>
-                <input type="text" id="location" value={location} onChange={(e) => setLocation(e.target.value)}/>
+                <label htmlFor="city">City</label>
+                <input type="text" id="city" value={city} onChange={(e) => setCity(e.target.value)} />
+
+                <label htmlFor="country">Country</label>
+                <input type="text" id="country" value={country} onChange={(e) => setCountry(e.target.value)} />
                 
                 <input type="submit" value="Search" />
             </form>
