@@ -23,9 +23,11 @@ const SearchResults = () => {
     const [maxTemp, setMaxTemp] = useState("");
 
     useEffect(() => {
+        // We have already entered a search. Thus, if we want to enter another search, we must refresh the page.
         if (apiUrl !== "") {
             window.location.reload();
         }
+        setDataLoaded(false); // Reset status of data loaded to avoid visual bug.
         setApiUrl(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`);
     }, [city]);
 
