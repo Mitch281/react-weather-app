@@ -2,8 +2,9 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { config } from "../config.js";
 import { countryCodes } from "../country-codes.js";
-import WeatherOutput from './WeatherOutput.js';
 import Loading from "./Loading.js";
+import FeelsLike from "./Results/FeelsLike.js";
+import Location from "./Results/Location.js";
 
 const SearchResults = () => {
     const { city, country } = useParams();
@@ -56,11 +57,20 @@ const SearchResults = () => {
         }
     }, [dataLoaded]);
 
+    function result() {
+        return (
+            <div id="results">
+                <Location city={city} country={country} />
+                <FeelsLike feelsLike={feelsLike} />
+            </div>
+        );
+    }
+
     return (
-        <div id="result">
-            {dataLoaded ? <WeatherOutput city={city} country={country} feelsLike={feelsLike} /> : <Loading />}
-        </div>
-    )
+        <>
+            {dataLoaded ? result() : <Loading />}
+        </>
+    );
 }
 
 export default SearchResults
