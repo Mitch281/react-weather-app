@@ -5,6 +5,7 @@ import { countryCodes } from "../country-codes.js";
 import Loading from "./Loading.js";
 import FeelsLike from "./Results/FeelsLike.js";
 import Location from "./Results/Location.js";
+import MinTempMaxTemp from './Results/MinTempMaxTemp.js';
 
 const SearchResults = () => {
     const { city, country } = useParams();
@@ -17,6 +18,8 @@ const SearchResults = () => {
     const [dataLoaded, setDataLoaded] = useState(false);
 
     const [feelsLike, setFeelsLike] = useState("");
+    const [minTemp, setMinTemp] = useState("");
+    const [maxTemp, setMaxTemp] = useState("");
 
     useEffect(() => {
         setApiUrl(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`);
@@ -54,6 +57,8 @@ const SearchResults = () => {
     useEffect(() => {
         if (dataLoaded) {
             setFeelsLike(kelvinToCelsius(apiData.main.feels_like));
+            setMinTemp(kelvinToCelsius(apiData.main.temp_min));
+            setMaxTemp(kelvinToCelsius(apiData.main.temp_max));
         }
     }, [dataLoaded]);
 
@@ -62,6 +67,7 @@ const SearchResults = () => {
             <div id="results">
                 <Location city={city} country={country} />
                 <FeelsLike feelsLike={feelsLike} />
+                <MinTempMaxTemp minTemp={minTemp} maxTemp={maxTemp} />
             </div>
         );
     }
