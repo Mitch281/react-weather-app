@@ -1,7 +1,6 @@
 import SearchWeather from "./Components/SearchWeather";
 import SearchResults from "./Components/SearchResults";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import { useEffect, useState } from "react";
 
 function App() {
 
