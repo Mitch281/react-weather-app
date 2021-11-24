@@ -1,8 +1,8 @@
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useState } from "react";
 import { countryCodes } from "../country-codes.js";
 
-const SearchWeather = (props) => {
+const SearchWeather = () => {
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
     const history = useHistory();

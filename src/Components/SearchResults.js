@@ -8,6 +8,7 @@ import Location from "./Results/Location.js";
 import MinTempMaxTemp from './Results/MinTempMaxTemp.js';
 
 const SearchResults = () => {
+
     const { city, country } = useParams();
     const countryCode = countryCodes[country];
 
@@ -22,8 +23,11 @@ const SearchResults = () => {
     const [maxTemp, setMaxTemp] = useState("");
 
     useEffect(() => {
+        if (apiUrl !== "") {
+            window.location.reload();
+        }
         setApiUrl(`https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${apiKey}`);
-    }, []);
+    }, [city]);
 
     function kelvinToCelsius(degrees) {
         const degreesCelsius = degrees - 273.15;
