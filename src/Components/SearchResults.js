@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { config } from "../config.js";
 import { countryCodes } from "../country-codes.js";
+import WeatherOutput from './WeatherOutput.js';
+import Loading from "./Loading.js";
 
 const SearchResults = () => {
     const { city, country } = useParams();
@@ -55,9 +57,8 @@ const SearchResults = () => {
     }, [dataLoaded]);
 
     return (
-        <div id="weather">
-            <h1>The weather today in {city}, {country}</h1>
-            <p>Feels like: {feelsLike}</p>
+        <div id="result">
+            {dataLoaded ? <WeatherOutput city={city} country={country} feelsLike={feelsLike} /> : <Loading />}
         </div>
     )
 }
