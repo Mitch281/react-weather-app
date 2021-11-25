@@ -9,6 +9,7 @@ import MinTempMaxTemp from './Results/MinTempMaxTemp.js';
 import DisplayHumidity from './Results/DisplayHumidity.js';
 import Wind from "./Results/Wind.js";
 import CloudCover from './Results/CloudCover.js';
+import Rain from './Results/Rain.js';
 
 const SearchResults = () => {
 
@@ -29,6 +30,7 @@ const SearchResults = () => {
     const [windSpeed, setWindSpeed] = useState("");
     const [windDirection, setWindDirection] = useState("");
     const [cloudCover, setCloudCover] = useState("");
+    const [rainInLastHour, setRaininLastHour] = useState("");
 
     useEffect(() => {
         // We have already entered a search. Thus, if we want to enter another search, we must refresh the page.
@@ -64,6 +66,7 @@ const SearchResults = () => {
 
     useEffect(() => {
         if (apiData !== "") {
+            console.log(apiData);
             setDataLoaded(true);
         }
     }, [apiData]);
@@ -82,6 +85,13 @@ const SearchResults = () => {
                 console.log(error);
                 setDataExists(false);
             }
+
+            // Since rain key oes not always exist, we need a seperate try catch block for rain.
+            try {
+                setRaininLastHour(apiData.rain["1h"]);
+            } catch (error) {
+                setRaininLastHour("0");
+            }
         }
     }, [dataLoaded]);
 
@@ -95,6 +105,7 @@ const SearchResults = () => {
                     <DisplayHumidity humidity={humidity} />
                     <Wind windSpeed={windSpeed} windDirection={windDirection} />
                     <CloudCover cloudCover={cloudCover} />
+                    <Rain rainInLastHour={rainInLastHour} />
                 </div>
             );
         }
