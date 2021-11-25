@@ -1,7 +1,8 @@
 const FeelsLike = (props) => {
     return (
         <div id="feels-like">
-            <p>Feels like: {props.feelsLike}</p>        
+            <h2>Feels like</h2>
+            <span>{props.feelsLike}</span>       
         </div>
     )
 }

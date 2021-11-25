@@ -19,8 +19,10 @@ const Location = (props) => {
         return dayNumber + "/" + monthNumber + "/" + year;
     }
 
+    const dateToday = getTodaysDate();
+
     return (
-        <h1>The weather today ({getTodaysDate()}) in {props.city}, {props.country}</h1>
+        <h2>Weather today ({dateToday}) in {props.city}, {props.country}</h2>
     );
 }
 
