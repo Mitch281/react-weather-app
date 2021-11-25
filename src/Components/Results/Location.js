@@ -3,8 +3,8 @@ const Location = (props) => {
     // Gets today's date in dd/mm/yyyy format.
     function getTodaysDate() {
         const dateToday = new Date();
-        const dayNumber = dateToday.getDate().toString();
-        const monthNumber = (dateToday.getMonth() + 1).toString();
+        let dayNumber = dateToday.getDate().toString();
+        let monthNumber = (dateToday.getMonth() + 1).toString();
         const year = dateToday.getFullYear().toString();
 
         // Adding 0's in front of day and month numbers if necessary to satisfy dd/mm/yyyy format.

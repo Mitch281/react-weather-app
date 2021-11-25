@@ -1,4 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap');
+
+* {
+  font-family: "Lato", "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
 body {
-  background-image: linear-gradient(#87ceeb, white);
-  height: 100vh;
+  background: linear-gradient(#87ceeb, white) fixed;
+}
+
+#results {
+  width: 50vw;
+  border: 2px solid black;
+}
+
+#current-temperature {
+  color: white;
+  font-size: 5em;
+  font-weight: bold;
+}
+
+#extremes {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.max-temp {
+  color: red;
+}
+
+.min-temp {
+  color: white;
+}
+
+#humidity {
+  color: white;
 }

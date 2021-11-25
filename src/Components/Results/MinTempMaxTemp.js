@@ -1,8 +1,16 @@
 const MinTempMaxTemp = (props) => {
     return (
         <div id="extremes">
-            <p>Min temp: {props.minTemp}</p>
-            <p>Max temp: {props.maxTemp}</p>
+            <div>
+                <span class="max-temp">High</span>
+                <span>/</span>
+                <span class="min-temp">Low</span>
+            </div>
+            <div>
+                <span class="max-temp">{props.maxTemp}</span>
+                <span>/</span>
+                <span class="min-temp">{props.minTemp}</span>
+            </div>
         </div>
     )
 }

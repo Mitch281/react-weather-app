@@ -1,7 +1,7 @@
 const DisplayHumidity = (props) => {
     return (
         <div id="humidity">
-            Humidity: {props.humidity}
+            Humidity: {props.humidity}%
         </div>
     )
 }

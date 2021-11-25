@@ -45,7 +45,7 @@ const SearchResults = () => {
         const degreesCelsius = degrees - 273.15;
 
         // Only first decimal place.
-        return Math.round(degreesCelsius * 10) / 10
+        return Math.round(degreesCelsius * 10) / 10;
     }
 
     useEffect(() => {
