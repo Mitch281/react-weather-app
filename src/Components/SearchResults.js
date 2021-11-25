@@ -6,6 +6,8 @@ import Loading from "./Loading.js";
 import FeelsLike from "./Results/FeelsLike.js";
 import Location from "./Results/Location.js";
 import MinTempMaxTemp from './Results/MinTempMaxTemp.js';
+import DisplayHumidity from './Results/DisplayHumidity.js';
+import Wind from "./Results/Wind.js";
 
 const SearchResults = () => {
 
@@ -22,6 +24,9 @@ const SearchResults = () => {
     const [feelsLike, setFeelsLike] = useState("");
     const [minTemp, setMinTemp] = useState("");
     const [maxTemp, setMaxTemp] = useState("");
+    const [humidity, setHumidity] = useState("");
+    const [windSpeed, setWindSpeed] = useState("");
+    const [windDirection, setWindDirection] = useState("");
 
     useEffect(() => {
         // We have already entered a search. Thus, if we want to enter another search, we must refresh the page.
@@ -67,7 +72,11 @@ const SearchResults = () => {
                 setFeelsLike(kelvinToCelsius(apiData.main.feels_like));
                 setMinTemp(kelvinToCelsius(apiData.main.temp_min));
                 setMaxTemp(kelvinToCelsius(apiData.main.temp_max));
+                setHumidity(apiData.main.humidity);
+                setWindSpeed(apiData.wind.speed);
+                setWindDirection(apiData.wind.deg);
             } catch (error) {
+                console.log(error);
                 setDataExists(false);
             }
         }
@@ -80,6 +89,8 @@ const SearchResults = () => {
                     <Location city={city} country={country} />
                     <FeelsLike feelsLike={feelsLike} />
                     <MinTempMaxTemp minTemp={minTemp} maxTemp={maxTemp} />
+                    <DisplayHumidity humidity={humidity} />
+                    <Wind windSpeed={windSpeed} windDirection={windDirection} />
                 </div>
             );
         }
