@@ -17,6 +17,7 @@ const SearchResults = () => {
     const [apiUrl, setApiUrl] = useState("");
     const [apiData, setApiData] = useState("");
     const [dataLoaded, setDataLoaded] = useState(false);
+    const [dataExists, setDataExists] = useState(true);
 
     const [feelsLike, setFeelsLike] = useState("");
     const [minTemp, setMinTemp] = useState("");
@@ -62,19 +63,28 @@ const SearchResults = () => {
 
     useEffect(() => {
         if (dataLoaded) {
-            setFeelsLike(kelvinToCelsius(apiData.main.feels_like));
-            setMinTemp(kelvinToCelsius(apiData.main.temp_min));
-            setMaxTemp(kelvinToCelsius(apiData.main.temp_max));
+            try {
+                setFeelsLike(kelvinToCelsius(apiData.main.feels_like));
+                setMinTemp(kelvinToCelsius(apiData.main.temp_min));
+                setMaxTemp(kelvinToCelsius(apiData.main.temp_max));
+            } catch (error) {
+                setDataExists(false);
+            }
         }
     }, [dataLoaded]);
 
     function result() {
+        if (dataExists) {
+            return (
+                <div id="results">
+                    <Location city={city} country={country} />
+                    <FeelsLike feelsLike={feelsLike} />
+                    <MinTempMaxTemp minTemp={minTemp} maxTemp={maxTemp} />
+                </div>
+            );
+        }
         return (
-            <div id="results">
-                <Location city={city} country={country} />
-                <FeelsLike feelsLike={feelsLike} />
-                <MinTempMaxTemp minTemp={minTemp} maxTemp={maxTemp} />
-            </div>
+            <h2>There is no data for this location!</h2>
         );
     }
 
