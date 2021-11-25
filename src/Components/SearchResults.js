@@ -8,6 +8,7 @@ import Location from "./Results/Location.js";
 import MinTempMaxTemp from './Results/MinTempMaxTemp.js';
 import DisplayHumidity from './Results/DisplayHumidity.js';
 import Wind from "./Results/Wind.js";
+import CloudCover from './Results/CloudCover.js';
 
 const SearchResults = () => {
 
@@ -27,6 +28,7 @@ const SearchResults = () => {
     const [humidity, setHumidity] = useState("");
     const [windSpeed, setWindSpeed] = useState("");
     const [windDirection, setWindDirection] = useState("");
+    const [cloudCover, setCloudCover] = useState("");
 
     useEffect(() => {
         // We have already entered a search. Thus, if we want to enter another search, we must refresh the page.
@@ -75,6 +77,7 @@ const SearchResults = () => {
                 setHumidity(apiData.main.humidity);
                 setWindSpeed(apiData.wind.speed);
                 setWindDirection(apiData.wind.deg);
+                setCloudCover(apiData.clouds.all);
             } catch (error) {
                 console.log(error);
                 setDataExists(false);
@@ -91,6 +94,7 @@ const SearchResults = () => {
                     <MinTempMaxTemp minTemp={minTemp} maxTemp={maxTemp} />
                     <DisplayHumidity humidity={humidity} />
                     <Wind windSpeed={windSpeed} windDirection={windDirection} />
+                    <CloudCover cloudCover={cloudCover} />
                 </div>
             );
         }
