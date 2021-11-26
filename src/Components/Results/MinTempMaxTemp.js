@@ -7,9 +7,9 @@ const MinTempMaxTemp = (props) => {
                 <span className="min-temp">Low</span>
             </div>
             <div>
-                <span className="max-temp">{props.maxTemp}</span>
+                <span className="max-temp">{props.maxTemp}&deg;C</span>
                 <span>&nbsp;/&nbsp;</span>
-                <span className="min-temp">{props.minTemp}</span>
+                <span className="min-temp">{props.minTemp}&deg;C</span>
             </div>
         </div>
     )

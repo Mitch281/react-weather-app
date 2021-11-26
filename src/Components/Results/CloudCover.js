@@ -1,7 +1,7 @@
 const CloudCover = (props) => {
     return (
         <div id="cloud-information">
-            Cloud Cover: {props.cloudCover}%
+            <p>Cloud Cover: {props.cloudCover}%</p>
         </div>
     );
 }

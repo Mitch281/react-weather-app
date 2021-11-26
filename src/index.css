@@ -19,8 +19,12 @@ input {
   border: 2px solid black;
 }
 
+#results div, #results h2 {
+  margin-left: 5px;
+  color: black;
+}
+
 #current-temperature {
-  color: white;
   font-size: 5em;
   font-weight: bold;
 }
@@ -34,12 +38,4 @@ input {
 
 .max-temp {
   color: red;
-}
-
-.min-temp {
-  color: white;
-}
-
-#humidity {
-  color: white;
 }

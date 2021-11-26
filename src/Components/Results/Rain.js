@@ -1,7 +1,7 @@
 const Rain = (props) => {
     return (
         <div>
-            Rainfall: {props.rainInLastHour} mm in last hour
+            <p>Rainfall: {props.rainInLastHour} mm in last hour</p>
         </div>
     )
 }
