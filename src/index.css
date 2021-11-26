@@ -9,7 +9,12 @@ body {
   background: linear-gradient(#87ceeb, white) fixed;
 }
 
+input {
+  cursor: pointer;
+}
+
 #results {
+  margin-top: 10px;
   width: 50vw;
   border: 2px solid black;
 }

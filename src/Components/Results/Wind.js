@@ -8,7 +8,7 @@ const Wind = (props) => {
     return (
         <div id="wind-information">
             <p>Wind Speed: {convertToKmh(props.windSpeed)} km/h</p>
-            <p>Wind Direction: {props.windDirection}</p>
+            <p>Wind Direction: {props.windDirection}&deg;</p>
         </div>
     )
 }
